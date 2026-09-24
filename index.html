@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Little Surprise For You 💗</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: radial-gradient(circle at top, #291044, #080611 70%);
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ---------- STARS ---------- */
+
+.stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: .2; }
+    to { opacity: 1; transform: scale(1.8); }
+}
+
+/* ---------- SCREEN ---------- */
+
+.screen {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    text-align: center;
+}
+
+.screen.active {
+    display: flex;
+    animation: fadeIn .8s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    width: 100%;
+    max-width: 650px;
+}
+
+/* ---------- TEXT ---------- */
+
+h1 {
+    font-size: clamp(2rem, 7vw, 4rem);
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+p {
+    line-height: 1.7;
+    color: #e8dff0;
+}
+
+/* ---------- BUTTON ---------- */
+
+button {
+    border: none;
+    padding: 14px 25px;
+    border-radius: 50px;
+    margin: 8px;
+    background: linear-gradient(135deg, #ff4fa3, #a34cff);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(255, 72, 169, .35);
+    transition: .25s;
+}
+
+button:hover {
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 0 30px rgba(255, 72, 169, .7);
+}
+
+button:active {
+    transform: scale(.95);
+}
+
+/* ---------- GIFT ---------- */
+
+.gift {
+    width: 180px;
+    height: 130px;
+    background: linear-gradient(135deg, #ff4f9a, #b13cff);
+    margin: 30px auto;
+    position: relative;
+    border-radius: 10px;
+    animation: floating 2s ease-in-out infinite;
+    box-shadow: 0 0 40px rgba(255, 70, 170, .5);
+}
+
+.gift::before {
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 100%;
+    background: #ffd45c;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.gift::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 25px;
+    background: #ffd45c;
+    top: 45%;
+    transform: translateY(-50%);
+}
+
+@keyframes floating {
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* ---------- LETTER ---------- */
+
+.letter {
+    background: rgba(255,255,255,.95);
+    color: #35213e;
+    padding: 35px;
+    border-radius: 15px;
+    text-align: left;
+    box-shadow: 0 0 50px rgba(255, 100, 200, .25);
+    transform: rotate(-1deg);
+}
+
+.letter p {
+    color: #35213e;
+    margin-bottom: 15px;
+}
+
+.signature {
+    text-align: right;
+    font-style: italic;
+}
+
+/* ---------- FLOWER ---------- */
+
+.flower-area {
+    height: 380px;
+    position: relative;
+    margin-top: 20px;
+}
+
+.flower {
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+}
+
+.stem {
+    width: 10px;
+    height: 190px;
+    background: linear-gradient(to right, #20783d, #55c95f);
+    margin: auto;
+    border-radius: 10px;
+}
+
+.leaf {
+    position: absolute;
+    width: 70px;
+    height: 35px;
+    background: #39a950;
+    border-radius: 100% 0;
+}
+
+.leaf.left {
+    left: -60px;
+    bottom: 80px;
+    transform: rotate(-25deg);
+}
+
+.leaf.right {
+    right: -60px;
+    bottom: 120px;
+    transform: rotate(25deg) scaleX(-1);
+}
+
+.bloom {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    left: 50%;
+    bottom: 170px;
+    transform: translateX(-50%);
+    animation: bloom 3s infinite ease-in-out;
+}
+
+.petal {
+    position: absolute;
+    width: 75px;
+    height: 105px;
+    background: linear-gradient(#ff8ed1, #c142ff);
+    border-radius: 50% 50% 45% 45%;
+    left: 38px;
+    top: 20px;
+    transform-origin: 50% 90%;
+    box-shadow: 0 0 25px #ff5bc8;
+}
+
+.petal:nth-child(1) { transform: rotate(0deg); }
+.petal:nth-child(2) { transform: rotate(60deg); }
+.petal:nth-child(3) { transform: rotate(120deg); }
+.petal:nth-child(4) { transform: rotate(180deg); }
+.petal:nth-child(5) { transform: rotate(240deg); }
+.petal:nth-child(6) { transform: rotate(300deg); }
+
+.center {
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    background: #ffd85c;
+    border-radius: 50%;
+    left: 48px;
+    top: 68px;
+    box-shadow: 0 0 30px #ffd85c;
+    z-index: 5;
+}
+
+@keyframes bloom {
+    0%,100% {
+        transform: translateX(-50%) scale(.9) rotate(0deg);
+    }
+
+    50% {
+        transform: translateX(-50%) scale(1.08) rotate(5deg);
+    }
+}
+
+/* ---------- QUIZ ---------- */
+
+.quiz-box {
+    background: rgba(255,255,255,.08);
+    padding: 30px;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,.15);
+}
+
+.option {
+    display: block;
+    width: 100%;
+    margin: 12px 0;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.2);
+}
+
+/* ---------- SECRET ---------- */
+
+.secret {
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.15);
+    padding: 30px;
+    border-radius: 25px;
+    backdrop-filter: blur(12px);
+}
+
+.secret-message {
+    display: none;
+    margin-top: 25px;
+    font-size: 22px;
+    color: #ff9fd8;
+    animation: reveal 1s ease;
+}
+
+@keyframes reveal {
+    from {
+        opacity: 0;
+        transform: scale(.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ---------- FLOATING HEARTS ---------- */
+
+.floating {
+    position: fixed;
+    bottom: -30px;
+    font-size: 20px;
+    pointer-events: none;
+    animation: rise 5s linear forwards;
+    z-index: 10;
+}
+
+@keyframes rise {
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ---------- CONFETTI ---------- */
+
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    top: -20px;
+    z-index: 100;
+    animation: fall 4s linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* ---------- FINAL ---------- */
+
+.final-heart {
+    font-size: 100px;
+    animation: heartbeat 1.2s infinite;
+}
+
+@keyframes heartbeat {
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.25);
+    }
+}
+
+.small {
+    font-size: 14px;
+    opacity: .7;
+    margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+
+<!-- SCREEN 1 -->
+
+<section class="screen active" id="screen1">
+
+<div class="container">
+
+<h1>Hey, Bestie! 💗</h1>
+
+<p>
+I made something for you...
+<br>
+It's not just a normal webpage.
+<br>
+So please don't skip anything. 👀
+</p>
+
+<div class="gift"></div>
+
+<button onclick="nextScreen(2)">
+🎁 Open Your Surprise
+</button>
+
+<p class="small">
+Warning: excessive cuteness ahead.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- SCREEN 2 -->
+
+<section class="screen" id="screen2">
+
+<div class="container">
+
+<h2>Wait... before anything else 💌</h2>
+
+<div class="letter">
+
+<p>
+Dear Bestie,
+</p>
+
+<p>
+I just wanted to make something a little different for you.
+Not because it's your birthday, not because there's a special occasion...
+</p>
+
+<p>
+But simply because sometimes we forget to tell the people who matter
+how much we appreciate them.
+</p>
+
+<p>
+Thank you for the laughs, random conversations, silly moments,
+and all the memories we've made.
+</p>
+
+<p>
+I'm really grateful that you're part of my life. 💗
+</p>
+
+<p class="signature">
+— James
+</p>
+
+</div>
+
+<button onclick="nextScreen(3)">
+Continue 💗
+</button>
+
+</div>
+
+</section>
+
+
+<!-- SCREEN 3 -->
+
+<section class="screen" id="screen3">
+
+<div class="container">
+
+<h2>Okay... quick question 👀</h2>
+
+<p>
+What do you think you are to me?
+</p>
+
+<br>
+
+<button onclick="wrongAnswer()">
+😌 Just a friend
+</button>
+
+<button onclick="correctAnswer()">
+💗 My favorite person
+</button>
+
+<button onclick="wrongAnswer()">
+😂 My headache
+</button>
+
+<p id="answer"></p>
+
+</div>
+
+</section>
+
+
+<!-- SCREEN 4 -->
+
+<section class="screen" id="screen4">
+
+<div class="container">
+
+<h2>Since you're still here... 🌸</h2>
+
+<p>
+I made a flower for you.
+Watch it bloom.
+</p>
+
+<div class="flower-area">
+
+<div class="flower">
+
+<div class="bloom">
+
+<div class="petal"></div>
+<div class="petal"></div>
+<div class="petal"></div>
+<div class="petal"></div>
+<div class="petal"></div>
+<div class="petal"></div>
+
+<div class="center"></div>
+
+</div>
+
+<div class="stem"></div>
+
+<div class="leaf left"></div>
+<div class="leaf right"></div>
+
+</div>
+
+</div>
+
+<button onclick="nextScreen(5)">
+🌸 There's More
+</button>
+
+</div>
+
+</section>
+
+
+<!-- SCREEN 5 -->
+
+<section class="screen" id="screen5">
+
+<div class="container">
+
+<h2>Mini Game 🎮</h2>
+
+<p>
+Let's see how well you know me.
+</p>
+
+<div class="quiz-box">
+
+<h3>What would James probably choose?</h3>
+
+<br>
+
+<button class="option" onclick="quizAnswer(false)">
+🍕 Free food
+</button>
+
+<button class="option" onclick="quizAnswer(false)">
+😴 Sleep all day
+</button>
+
+<button class="option" onclick="quizAnswer(true)">
+💰 Build his dreams
+</button>
+
+<button class="option" onclick="quizAnswer(false)">
+📱 Stay offline forever
+</button>
+
+<p id="quizResult"></p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SCREEN 6 -->
+
+<section class="screen" id="screen6">
+
+<div class="container">
+
+<h2>One last little thing... 👀</h2>
+
+<div class="secret">
+
+<p>
+There's actually a hidden message here.
+</p>
+
+<button onclick="revealSecret()">
+🔐 Unlock Message
+</button>
+
+<div class="secret-message" id="secretMessage">
+
+✨ You make ordinary days feel special. ✨
+
+<br><br>
+
+And I'm genuinely thankful
+that I get to call you my best friend. 💗
+
+</div>
+
+</div>
+
+<br>
+
+<button id="secretNext" style="display:none" onclick="nextScreen(7)">
+I found it! 💕
+</button>
+
+</div>
+
+</section>
+
+
+<!-- SCREEN 7 -->
+
+<section class="screen" id="screen7">
+
+<div class="container">
+
+<div class="final-heart">
+💗
+</div>
+
+<h1>Thank You, Bestie.</h1>
+
+<p>
+For being there.
+<br>
+For making me laugh.
+<br>
+For listening to my random stories.
+<br>
+For simply being you.
+</p>
+
+<br>
+
+<p>
+Some people come into our lives for a moment.
+<br>
+Some stay for years.
+<br><br>
+
+And I'm really glad you're one of the people
+I get to share this journey with.
+</p>
+
+<button onclick="celebrate()">
+🎉 One Last Surprise
+</button>
+
+</div>
+
+</section>
+
+
+<script>
+
+/* ---------- CREATE STARS ---------- */
+
+const stars = document.getElementById("stars");
+
+for(let i = 0; i < 100; i++){
+
+    const star = document.createElement("div");
+
+    star.className = "star";
+
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+
+    star.style.animationDelay =
+        Math.random() * 3 + "s";
+
+    stars.appendChild(star);
+}
+
+
+/* ---------- SCREEN NAVIGATION ---------- */
+
+function nextScreen(number){
+
+    document.querySelectorAll(".screen")
+        .forEach(screen => screen.classList.remove("active"));
+
+    document.getElementById("screen" + number)
+        .classList.add("active");
+
+    createHearts();
+}
+
+
+/* ---------- HEARTS ---------- */
+
+function createHearts(){
+
+    for(let i = 0; i < 8; i++){
+
+        const heart = document.createElement("div");
+
+        heart.className = "floating";
+
+        heart.innerHTML =
+            ["💗","💕","💖","💘","✨","🦋"]
+            [Math.floor(Math.random() * 6)];
+
+        heart.style.left =
+            Math.random() * 100 + "%";
+
+        heart.style.animationDuration =
+            (3 + Math.random() * 3) + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 6000);
+    }
+}
+
+
+/* ---------- ANSWER ---------- */
+
+function wrongAnswer(){
+
+    document.getElementById("answer").innerHTML =
+        "Hmm... nice try 😂 Try again.";
+
+}
+
+function correctAnswer(){
+
+    document.getElementById("answer").innerHTML =
+        "Awww... you got it. 💗";
+
+    setTimeout(() => {
+        nextScreen(4);
+    }, 1300);
+
+}
+
+
+/* ---------- QUIZ ---------- */
+
+function quizAnswer(correct){
+
+    const result =
+        document.getElementById("quizResult");
+
+    if(correct){
+
+        result.innerHTML =
+            "CORRECT! 😎 You actually know me!";
+
+        setTimeout(() => {
+            nextScreen(6);
+        }, 1500);
+
+    } else {
+
+        result.innerHTML =
+            "HAHA nope 😂 Try again!";
+
+    }
+
+}
+
+
+/* ---------- SECRET ---------- */
+
+function revealSecret(){
+
+    document.getElementById("secretMessage")
+        .style.display = "block";
+
+    document.getElementById("secretNext")
+        .style.display = "inline-block";
+
+    createHearts();
+}
+
+
+/* ---------- CONFETTI ---------- */
+
+function celebrate(){
+
+    for(let i = 0; i < 150; i++){
+
+        const confetti =
+            document.createElement("div");
+
+        confetti.className = "confetti";
+
+        confetti.style.left =
+            Math.random() * 100 + "%";
+
+        confetti.style.background =
+            ["#ff4fa3",
+             "#ffd45c",
+             "#8f7cff",
+             "#65e6ff",
+             "#ffffff"]
+            [Math.floor(Math.random() * 5)];
+
+        confetti.style.animationDuration =
+            (2 + Math.random() * 3) + "s";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+            confetti.remove();
+        }, 5000);
+    }
+
+    createHearts();
+
+    setTimeout(() => {
+
+        alert(
+            "💗 Surprise! Thank you for being my BFF Premium Promax! 🦋"
+        );
+
+    }, 1000);
+
+}
+
+
+/* ---------- CONTINUOUS HEARTS ---------- */
+
+setInterval(() => {
+
+    if(Math.random() > .6){
+        createHearts();
+    }
+
+}, 4000);
+
+</script>
+
+</body>
+</html>
